@@ -31,19 +31,46 @@ function csstask(done) {
         // ...
       ]))
       // ...
-      .pipe(gulp.dest('./dist'))
+      .pipe(gulp.dest('./dist/assets/style'))
       .pipe(connect.reload())
       done()
   }
+  function watchCss() {
+      gulp.watch("./src/tailwind/**/*.css", { ignoreInitial: false}, csstask)
+  }
 /////////////////////////
-function watchCss() {
-    gulp.watch("./src/tailwind/**/*.css", { ignoreInitial: false}, csstask)
+function images(done) {
+    const imagemin = require("gulp-imagemin")
+    gulp.src("./src/images/*")
+        .pipe(imagemin())
+        .pipe(gulp.dest('./dist/assets/images'))
+        .pipe(connect.reload());
+    done();
+}
+function watchImages() {
+    gulp.watch("./src/images/*", { ignoreInitial: false }, images);
+}
+
+function javascript(done) {
+    const babel = require("gulp-babel")
+    gulp.src("./src/javascript/**/*.js")
+        .pipe(babel({
+            presets: ["@babel/env"]
+        }).on("error", e => console.error(e)))
+        .pipe(gulp.dest('./dist/assets/javascript'))
+        .pipe(connect.reload());
+    done();
+}
+function watchJavascript() {
+    gulp.watch("./src/javascript/**/*.js", { ignoreInitial: false }, javascript);
 }
 
 
 gulp.task("dev", function(done){
     watchHtml();
     watchCss();
+    watchJavascript();
+    watchImages();
     connect.server({
         livereload: true,
         root: "dist"
