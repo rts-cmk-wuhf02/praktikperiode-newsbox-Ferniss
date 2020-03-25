@@ -1,5 +1,3 @@
 "use strict";
 
-document.addEventListener('DOMContentLoaded', function () {
-  alert("hej");
-});
+document.addEventListener('DOMContentLoaded', function () {});
