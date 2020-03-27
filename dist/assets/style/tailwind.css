@@ -13946,6 +13946,31 @@ video {
   transition-duration: 1000ms;
 }
 
+.clicked{
+  -webkit-animation: spinner 1s;
+          animation: spinner 1s;
+}
+
+@-webkit-keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

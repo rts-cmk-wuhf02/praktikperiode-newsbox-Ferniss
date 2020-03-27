@@ -3,3 +3,17 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+.clicked{
+    animation: spinner 1s;   
+}
+
+@keyframes spinner {
+    from {
+      transform: rotate(0deg);
+    }
+  
+    to {
+        transform: rotate(90deg);
+    }
+  }
