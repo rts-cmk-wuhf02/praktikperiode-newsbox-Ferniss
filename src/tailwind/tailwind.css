@@ -5,7 +5,12 @@
 @import "tailwindcss/utilities";
 
 .clicked{
-    animation: spinner 1s;   
+    animation: spinner 1s; 
+    animation-fill-mode: forwards;  
+}
+.clicked2{
+  animation: spinner2 1s; 
+  animation-fill-mode: forwards;  
 }
 
 @keyframes spinner {
@@ -15,5 +20,14 @@
   
     to {
         transform: rotate(90deg);
+    }
+  }
+  @keyframes spinner2 {
+    from {
+      transform: rotateX(0deg);
+    }
+  
+    to {
+        transform: rotateX(180deg);
     }
   }

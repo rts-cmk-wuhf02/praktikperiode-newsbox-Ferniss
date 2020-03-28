@@ -13949,6 +13949,15 @@ video {
 .clicked{
   -webkit-animation: spinner 1s;
           animation: spinner 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.clicked2{
+  -webkit-animation: spinner2 1s;
+          animation: spinner2 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes spinner {
@@ -13968,6 +13977,26 @@ video {
 
   to {
     transform: rotate(90deg);
+  }
+}
+
+@-webkit-keyframes spinner2 {
+  from {
+    transform: rotateX(0deg);
+  }
+
+  to {
+    transform: rotateX(180deg);
+  }
+}
+
+@keyframes spinner2 {
+  from {
+    transform: rotateX(0deg);
+  }
+
+  to {
+    transform: rotateX(180deg);
   }
 }
 
