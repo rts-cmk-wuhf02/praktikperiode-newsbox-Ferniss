@@ -14000,6 +14000,20 @@ video {
   }
 }
 
+.toggle__dot {
+  top: -.25rem;
+  left: -.25rem;
+  transition: all 0.3s ease-in-out;
+}
+
+input:checked ~ .toggle__dot {
+  transform: translateX(100%);
+}
+
+input:checked ~.shadow-inner{
+  background-color: #48bb78;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;
@@ -67299,3 +67313,4 @@ video {
     transition-duration: 1000ms;
   }
 }
+  
