@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', ()=>{
+  //bg-black
     fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
     
     method: "GET",

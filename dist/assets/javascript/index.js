@@ -15,6 +15,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 document.addEventListener('DOMContentLoaded', function () {
+  //bg-black
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
     method: "GET"
   }).then(function (response) {
