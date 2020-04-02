@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (ea.className === "europeAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          se.innerHTML += "\n                      <section class=\"flex justify-between items-center pt-2 my-3 p-6\">\n                        <figur class=\"flex items-center justify-center\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16\">\n                            <section>\n                                <h1>".concat(element.title, "</h1>\n                \n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                    </section>\n                      ");
+          se.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6\">\n                        <figur class=\"flex items-center justify-center\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16\">\n                            <section>\n                                <h1>".concat(element.title, "</h1>\n                \n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                    </section>\n                      ");
         });
       } else {
         se.innerHTML = "";

@@ -84,7 +84,7 @@ return xml2json(srcDOM)
                     if (ea.className === "europeAnimation clicked") {
                         data.rss.channel.item.forEach(element => {
                       se.innerHTML += `
-                      <section class="flex justify-between items-center pt-2 my-3 p-6">
+                      <section class="flex justify-between items-center my-6">
                         <figur class="flex items-center justify-center">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16">
                             <section>
@@ -102,14 +102,8 @@ return xml2json(srcDOM)
                     }
                 })
             });
-       
-    })
-  
-
-
-
-
-
+            
+          })
 
 let h = document.querySelector('#health')
 h.innerHTML = `
