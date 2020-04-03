@@ -25,3 +25,8 @@ document.body.style.backgroundColor = sessionStorage.getItem('bg');
 document.body.style.color = sessionStorage.getItem('cc');
 
 }
+let dot = document.querySelector('#dot')
+console.log(dot)
+dot.addEventListener('click', () =>{
+    alert("hej")
+})

@@ -18,3 +18,9 @@ function darker() {
   document.body.style.backgroundColor = sessionStorage.getItem('bg');
   document.body.style.color = sessionStorage.getItem('cc');
 }
+
+var dot = document.querySelector('#dot');
+console.log(dot);
+dot.addEventListener('click', function () {
+  alert("hej");
+});
