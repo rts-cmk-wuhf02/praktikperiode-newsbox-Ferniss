@@ -110,22 +110,24 @@ return xml2json(srcDOM)
                     }
                     let yoy = document.querySelectorAll(".yoy")
                     let mouseX;
-                    let mouseElement;
+                    let mouseY;
                     yoy.forEach(element => {
-                      element.addEventListener('mouseup',(e) =>{
-              
-                        if (e.clientX + 10 < mouseX) {
-                        
-                          console.log("mouseleft")
+                      element.addEventListener('touchend',(e) =>{
+                        if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
+                          
+                          if (e.changedTouches[0].clientX + 100 < mouseX) {
+                          
+                            element.style.transform = "translateX(-6rem)"
+                          }else if(e.changedTouches[0].clientX - 100 > mouseX)
+                          element.style.transform = "translateX(0)"
                         }
-                        console.log(mouseX, e)
                         
 
                       })
-                      element.addEventListener('mousedown',(e) =>{
-                        mouseX = e.clientX
-                        mouseElement = e.target
-                        console.log("yoy")
+                      element.addEventListener('touchstart',(e) =>{
+                        mouseX = e.touches[0].clientX
+                        mouseY = e.touches[0].clientY
+      
 
                       })
                       

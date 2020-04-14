@@ -106,19 +106,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var yoy = document.querySelectorAll(".yoy");
         var mouseX;
-        var mouseElement;
+        var mouseY;
         yoy.forEach(function (element) {
-          element.addEventListener('mouseup', function (e) {
-            if (e.clientX + 10 < mouseX) {
-              console.log("mouseleft");
+          element.addEventListener('touchend', function (e) {
+            if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
+              if (e.changedTouches[0].clientX + 100 < mouseX) {
+                element.style.transform = "translateX(-6rem)";
+              } else if (e.changedTouches[0].clientX - 100 > mouseX) element.style.transform = "translateX(0)";
             }
-
-            console.log(mouseX, e);
           });
-          element.addEventListener('mousedown', function (e) {
-            mouseX = e.clientX;
-            mouseElement = e.target;
-            console.log("yoy");
+          element.addEventListener('touchstart', function (e) {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
           }); // element.addEventListener('click', ()=>{
           //   element.style.transform = "translateX(-6rem)"
           // })
