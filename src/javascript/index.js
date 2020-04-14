@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', ()=>{
   //bg-black
+  if(sessionStorage.getItem("europe") == "on"){
+    
+
     fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
     
     method: "GET",
@@ -84,27 +87,39 @@ return xml2json(srcDOM)
                     if (ea.className === "europeAnimation clicked") {
                         data.rss.channel.item.forEach(element => {
                       se.innerHTML += `
-                      <section class="flex justify-between items-center my-6">
-                        <figur class="flex items-center justify-center">
+                      <section class="flex justify-between items-center my-6 yoy">
+                        <figur class="flex items-center justify-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16">
                             <section>
                                 <h1>${element.title}</h1>
-                
                                 <p>
                                 ${element.description}
                                 </p>
                             </section>
                         </figur>
+                        <figur class="flex items-center justify-center flex-shrink-0">
+                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                        </figur>
+                    </section>
+                    </section>
+
                     </section>
                       `;
                     })} else {
                         se.innerHTML = "";
                     }
+                    let yoy = document.querySelectorAll(".yoy")
+                    console.log(yoy)
+                    yoy.forEach(element => {
+                      
+                      element.addEventListener('click', ()=>{
+                        element.style.transform = "translateX(-103px)"
+                      })
+                    });
                 })
             });
-            
+          }
           })
-
 let h = document.querySelector('#health')
 h.innerHTML = `
 <figure class="flex items-center">
