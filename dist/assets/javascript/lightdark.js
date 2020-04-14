@@ -1,20 +1,5 @@
 "use strict";
 
-//klik europe fra
-var ekesempel = document.querySelector('.ekesempel');
-ekesempel.addEventListener("click", function () {
-  if (sessionStorage.getItem("europe") == "off") {
-    sessionStorage.setItem("europe", "on");
-  } else if (sessionStorage.getItem("europe") == "on") {
-    sessionStorage.setItem("europe", "off");
-  }
-});
-var ekesempel2 = document.querySelector('#toogleA');
-console.log(ekesempel2);
-ekesempel2.checked = false; // check om europe er slået til i session storage
-// klik europe til
-//sessionStorage.setItem("europe","on")
-
 document.body.style.backgroundColor = sessionStorage.getItem('bg');
 document.body.style.color = sessionStorage.getItem('cc');
 

@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   //bg-black
   if(sessionStorage.getItem("europe") == "on"){
     
-
     fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
     
     method: "GET",
@@ -88,9 +87,9 @@ return xml2json(srcDOM)
                         data.rss.channel.item.forEach(element => {
                       se.innerHTML += `
                       <section class="flex justify-between items-center my-6 yoy">
-                        <figur class="flex items-center justify-center w-full flex-shrink-0">
-                            <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16">
-                            <section>
+                        <figur class="flex items-center w-full flex-shrink-0">
+                            <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
+                            <section class="mx-4 newsTextContainer">
                                 <h1>${element.title}</h1>
                                 <p>
                                 ${element.description}
@@ -105,21 +104,41 @@ return xml2json(srcDOM)
 
                     </section>
                       `;
+
                     })} else {
                         se.innerHTML = "";
                     }
                     let yoy = document.querySelectorAll(".yoy")
-                    console.log(yoy)
+                    let mouseX;
+                    let mouseElement;
                     yoy.forEach(element => {
-                      
-                      element.addEventListener('click', ()=>{
-                        element.style.transform = "translateX(-103px)"
+                      element.addEventListener('mouseup',(e) =>{
+              
+                        if (e.clientX + 10 < mouseX) {
+                        
+                          console.log("mouseleft")
+                        }
+                        console.log(mouseX, e)
+                        
+
                       })
+                      element.addEventListener('mousedown',(e) =>{
+                        mouseX = e.clientX
+                        mouseElement = e.target
+                        console.log("yoy")
+
+                      })
+                      
+                      // element.addEventListener('click', ()=>{
+                      //   element.style.transform = "translateX(-6rem)"
+                      // })
                     });
                 })
             });
           }
           })
+
+          
 let h = document.querySelector('#health')
 h.innerHTML = `
 <figure class="flex items-center">

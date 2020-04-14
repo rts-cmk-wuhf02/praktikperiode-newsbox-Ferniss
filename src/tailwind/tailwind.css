@@ -33,15 +33,22 @@
   }
   .toggle__dot {
     top: -.25rem;
-    left: 1.5rem;
+  /*  left: 1.5rem;*/
     transition: all 0.3s ease-in-out;
   }
   
   input:checked ~ .toggle__dot {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
   input:checked ~.shadow-inner{
-    background-color: #C8D1D3;
-
+    @apply bg-teal-400;
   }
+  input:not(:checked) ~.shadow-inner{
+    background-color: #C8D1D3;
+  }
+
+  .newsTextContainer{
+    width: calc(100vw) - 6rem;
+  }
+  
   

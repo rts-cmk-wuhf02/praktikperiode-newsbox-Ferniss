@@ -98,18 +98,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (ea.className === "europeAnimation clicked") {
           data.rss.channel.item.forEach(function (element) {
-            se.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center justify-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16\">\n                            <section>\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+            se.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
           });
         } else {
           se.innerHTML = "";
         }
 
         var yoy = document.querySelectorAll(".yoy");
-        console.log(yoy);
+        var mouseX;
+        var mouseElement;
         yoy.forEach(function (element) {
-          element.addEventListener('click', function () {
-            element.style.transform = "translateX(-103px)";
+          element.addEventListener('mouseup', function (e) {
+            if (e.clientX + 10 < mouseX) {
+              console.log("mouseleft");
+            }
+
+            console.log(mouseX, e);
           });
+          element.addEventListener('mousedown', function (e) {
+            mouseX = e.clientX;
+            mouseElement = e.target;
+            console.log("yoy");
+          }); // element.addEventListener('click', ()=>{
+          //   element.style.transform = "translateX(-6rem)"
+          // })
         });
       });
     });
