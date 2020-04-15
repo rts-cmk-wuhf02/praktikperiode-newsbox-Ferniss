@@ -1,74 +1,8 @@
 
-  //bg-black
+  
   if(sessionStorage.getItem("europe") == "on"){
     
-    fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
-    
-    method: "GET",
-})
-.then(
-    response=> response.text())
-        .then( xmlStr => {
-    
-      /**
- * This function coverts a DOM Tree into JavaScript Object. 
- * @param srcDOM: DOM Tree to be converted. 
- */
-function xml2json(srcDOM) {
-    let children = [...srcDOM.children];
-  
-    // base case for recursion. 
-    if (!children.length) {
-      return srcDOM.innerHTML
-    }
-  
-    // initializing object to be returned. 
-    let jsonResult = {};
-  
-    for (let child of children) {
-  
-      // checking is child has siblings of same name. 
-      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
-  
-      // if child is array, save the values as array, else as strings. 
-      if (childIsArray) {
-        if (jsonResult[child.nodeName] === undefined) {
-          jsonResult[child.nodeName] = [xml2json(child)];
-        } else {
-          jsonResult[child.nodeName].push(xml2json(child));
-        }
-      } else {
-        jsonResult[child.nodeName] = xml2json(child);
-      }
-    }
-  
-    return jsonResult;
-  }
-  
-  // testing the function
 
-  
-  // converting to DOM Tree
-  const parser = new DOMParser();
-  const srcDOM = parser.parseFromString(xmlStr, "application/xml");
-  
-  // Converting DOM Tree To JSON. 
-return xml2json(srcDOM)
-  
-  /** The output will be
-  {
-    "book": {
-      "title": "Some title",
-      "description": "some description",
-      "author": { "id": "1", "name": "some author name" },
-      "review": ["nice book", "this book sucks", "amazing work"]
-    }
-  }
-  */  
-    }
-    )
-    .then(data=>{
-        console.log(data)
         let e = document.querySelector('#europe')
         e.innerHTML += `
             <figure class="flex items-center">
@@ -97,31 +31,17 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0 ekesempel">
+                        <img src="/assets/images/delete.png" alt="" class="h-24 w-24 bg-red-600 p-8 flex-shrink-0">
                         </figur>
                     </section>
                     </section>
 
                     </section>
                       `;
-                     
-                      let ekesempel = document.querySelector('.ekesempel');
-                      ekesempel.addEventListener('click', ()=>{
-                        let feed;
-                        if (localStorage.getItem("article")) {
-                          feed = JSON.parse(localStorage.getItem("article"));
-                          feed.push({title: element.title, description: element.description});
-                          console.log("hej")
-                        }else{
-                          feed = [{title: element.title, description: element.description}];
-                        }
-                        localStorage.setItem("article", JSON.stringify(feed))
-  
-                      })
+
                     })} else {
                         se.innerHTML = "";
                     }
-                    
                     let yoy = document.querySelectorAll(".yoy")
                     let mouseX;
                     let mouseY;
@@ -146,7 +66,7 @@ return xml2json(srcDOM)
                       })
                     });
                 })
-            });
+        
           }
           
 /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
@@ -249,7 +169,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                        <img src="/assets/images/delete.png" alt="" class="h-24 w-24 bg-red-600 p-8 flex-shrink-0">
                         </figur>
                     </section>
                     </section>
@@ -297,7 +217,7 @@ return xml2json(srcDOM)
 
 /////sssssssssssssssssssssssssssssssssssssssssssss
 //bg-black
-if(sessionStorage.getItem("sport") == "on"){
+//if(sessionStorage.getItem("europe") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml', {
     
@@ -394,7 +314,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                        <img src="/assets/images/delete.png" alt="" class="h-24 w-24 bg-red-600 p-8 flex-shrink-0">
                         </figur>
                     </section>
                     </section>
@@ -430,7 +350,7 @@ return xml2json(srcDOM)
                     });
                 })
             });
-         }
+         // }
 /////sssssssssssssssssssssssssssssssssssssssssssss 
 
 
@@ -438,7 +358,7 @@ return xml2json(srcDOM)
 
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 //bg-black
-if(sessionStorage.getItem("business") == "on"){
+//if(sessionStorage.getItem("europe") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/business.xml', {
     
@@ -535,7 +455,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                        <img src="/assets/images/delete.png" alt="" class="h-24 w-24 bg-red-600 p-8 flex-shrink-0">
                         </figur>
                     </section>
                     </section>
@@ -575,11 +495,11 @@ return xml2json(srcDOM)
                     });
                 })
             });
-          }
+         // }
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 //bg-black
-if(sessionStorage.getItem("travel") == "on"){
+//if(sessionStorage.getItem("europe") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/travel.xml', {
     
@@ -676,7 +596,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                        <img src="/assets/images/delete.png" alt="" class="h-24 w-24 bg-red-600 p-8 flex-shrink-0">
                         </figur>
                     </section>
                     </section>
@@ -716,4 +636,4 @@ return xml2json(srcDOM)
                     });
                 })
             });
-         }
+         // }
