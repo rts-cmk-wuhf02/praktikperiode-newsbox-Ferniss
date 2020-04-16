@@ -1,5 +1,3 @@
-
-  //bg-black
   if(localStorage.getItem("europe") == "on"){
     
     fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
@@ -53,18 +51,7 @@ function xml2json(srcDOM) {
   const srcDOM = parser.parseFromString(xmlStr, "application/xml");
   
   // Converting DOM Tree To JSON. 
-return xml2json(srcDOM)
-  
-  /** The output will be
-  {
-    "book": {
-      "title": "Some title",
-      "description": "some description",
-      "author": { "id": "1", "name": "some author name" },
-      "review": ["nice book", "this book sucks", "amazing work"]
-    }
-  }
-  */  
+return xml2json(srcDOM)  
     }
     )
     .then(data=>{
@@ -152,8 +139,7 @@ return xml2json(srcDOM)
           }
           
 /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-          
-//bg-black
+
 if(localStorage.getItem("health") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Health.xml', {
@@ -208,17 +194,6 @@ function xml2json(srcDOM) {
   
   // Converting DOM Tree To JSON. 
 return xml2json(srcDOM)
-  
-  /** The output will be
-  {
-    "book": {
-      "title": "Some title",
-      "description": "some description",
-      "author": { "id": "1", "name": "some author name" },
-      "review": ["nice book", "this book sucks", "amazing work"]
-    }
-  }
-  */  
     }
     )
     .then(data=>{
@@ -284,10 +259,6 @@ return xml2json(srcDOM)
       
 
                       })
-                      
-                      // element.addEventListener('click', ()=>{
-                      //   element.style.transform = "translateX(-6rem)"
-                      // })
                     });
                 })
             });
@@ -298,7 +269,6 @@ return xml2json(srcDOM)
 
 
 /////sssssssssssssssssssssssssssssssssssssssssssss
-//bg-black
 if(localStorage.getItem("sport") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml', {
@@ -352,18 +322,7 @@ function xml2json(srcDOM) {
   const srcDOM = parser.parseFromString(xmlStr, "application/xml");
   
   // Converting DOM Tree To JSON. 
-return xml2json(srcDOM)
-  
-  /** The output will be
-  {
-    "book": {
-      "title": "Some title",
-      "description": "some description",
-      "author": { "id": "1", "name": "some author name" },
-      "review": ["nice book", "this book sucks", "amazing work"]
-    }
-  }
-  */  
+return xml2json(srcDOM) 
     }
     )
     .then(data=>{
@@ -439,7 +398,6 @@ return xml2json(srcDOM)
 
 
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-//bg-black
 if(localStorage.getItem("business") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/business.xml', {
@@ -493,18 +451,7 @@ function xml2json(srcDOM) {
   const srcDOM = parser.parseFromString(xmlStr, "application/xml");
   
   // Converting DOM Tree To JSON. 
-return xml2json(srcDOM)
-  
-  /** The output will be
-  {
-    "book": {
-      "title": "Some title",
-      "description": "some description",
-      "author": { "id": "1", "name": "some author name" },
-      "review": ["nice book", "this book sucks", "amazing work"]
-    }
-  }
-  */  
+return xml2json(srcDOM) 
     }
     )
     .then(data=>{
@@ -570,17 +517,11 @@ return xml2json(srcDOM)
       
 
                       })
-                      
-                      // element.addEventListener('click', ()=>{
-                      //   element.style.transform = "translateX(-6rem)"
-                      // })
                     });
                 })
             });
           }
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-
-//bg-black
 if(localStorage.getItem("travel") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/travel.xml', {
@@ -625,8 +566,6 @@ function xml2json(srcDOM) {
   
     return jsonResult;
   }
-  
-  // testing the function
 
   
   // converting to DOM Tree
@@ -635,17 +574,6 @@ function xml2json(srcDOM) {
   
   // Converting DOM Tree To JSON. 
 return xml2json(srcDOM)
-  
-  /** The output will be
-  {
-    "book": {
-      "title": "Some title",
-      "description": "some description",
-      "author": { "id": "1", "name": "some author name" },
-      "review": ["nice book", "this book sucks", "amazing work"]
-    }
-  }
-  */  
     }
     )
     .then(data=>{
@@ -711,10 +639,6 @@ return xml2json(srcDOM)
       
 
                       })
-                      
-                      // element.addEventListener('click', ()=>{
-                      //   element.style.transform = "translateX(-6rem)"
-                      // })
                     });
                 })
             });

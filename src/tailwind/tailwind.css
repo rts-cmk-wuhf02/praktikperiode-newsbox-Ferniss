@@ -4,10 +4,13 @@
 
 @import "tailwindcss/utilities";
 
+/*is being used on the cateogry arrows*/
 .clicked{
     animation: spinner 1s; 
     animation-fill-mode: forwards;  
 }
+
+/*is being used on the cateogry arrows*/
 .clicked2{
   animation: spinner2 1s; 
   animation-fill-mode: forwards;  
