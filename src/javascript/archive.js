@@ -1,6 +1,4 @@
-
-  //bg-black
-  if(sessionStorage.getItem("europe") == "on"){
+if(localStorage.getItem("europe") == "on"){
     
     fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
     
@@ -89,7 +87,7 @@ return xml2json(srcDOM)
                                 JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
                             
                       se.innerHTML += `
-                      <section class="flex justify-between items-center my-6 yoy">
+                      <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
                             <section class="mx-4 newsTextContainer">
@@ -112,10 +110,10 @@ return xml2json(srcDOM)
                         se.innerHTML = "";
                     }
                     
-                    let yoy = document.querySelectorAll(".yoy")
+                    let slider = document.querySelectorAll(".slider")
                     let mouseX;
                     let mouseY;
-                    yoy.forEach(element => {
+                    slider.forEach(element => {
                       element.addEventListener('touchend',(e) =>{
                         if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
                           
@@ -142,7 +140,7 @@ return xml2json(srcDOM)
 /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
           
 //bg-black
-if(sessionStorage.getItem("health") == "on"){
+if(localStorage.getItem("health") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Health.xml', {
     
@@ -228,7 +226,7 @@ return xml2json(srcDOM)
                     if (ha.className === "healthAnimation clicked") {
                         data.rss.channel.item.forEach(element => {
                       sh.innerHTML += `
-                      <section class="flex justify-between items-center my-6 yoy">
+                      <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
                             <section class="mx-4 newsTextContainer">
@@ -250,10 +248,10 @@ return xml2json(srcDOM)
                     })} else {
                         sh.innerHTML = "";
                     }
-                    let yoy = document.querySelectorAll(".yoy")
+                    let slider = document.querySelectorAll(".slider")
                     let mouseX;
                     let mouseY;
-                    yoy.forEach(element => {
+                    slider.forEach(element => {
                       element.addEventListener('touchend',(e) =>{
                         if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
                           
@@ -287,7 +285,7 @@ return xml2json(srcDOM)
 
 /////sssssssssssssssssssssssssssssssssssssssssssss
 //bg-black
-//if(sessionStorage.getItem("europe") == "on"){
+if(localStorage.getItem("europe") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml', {
     
@@ -373,7 +371,7 @@ return xml2json(srcDOM)
                     if (sa.className === "sportAnimation clicked") {
                         data.rss.channel.item.forEach(element => {
                       ss.innerHTML += `
-                      <section class="flex justify-between items-center my-6 yoy">
+                      <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
                             <section class="mx-4 newsTextContainer">
@@ -395,10 +393,10 @@ return xml2json(srcDOM)
                     })} else {
                         ss.innerHTML = "";
                     }
-                    let yoy = document.querySelectorAll(".yoy")
+                    let slider = document.querySelectorAll(".slider")
                     let mouseX;
                     let mouseY;
-                    yoy.forEach(element => {
+                    slider.forEach(element => {
                       element.addEventListener('touchend',(e) =>{
                         if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
                           
@@ -420,7 +418,7 @@ return xml2json(srcDOM)
                     });
                 })
             });
-         // }
+         }
 /////sssssssssssssssssssssssssssssssssssssssssssss 
 
 
@@ -428,7 +426,7 @@ return xml2json(srcDOM)
 
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 //bg-black
-//if(sessionStorage.getItem("europe") == "on"){
+if(localStorage.getItem("europe") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/business.xml', {
     
@@ -514,7 +512,7 @@ return xml2json(srcDOM)
                     if (ba.className === "buisnessAnimation clicked") {
                         data.rss.channel.item.forEach(element => {
                       sb.innerHTML += `
-                      <section class="flex justify-between items-center my-6 yoy">
+                      <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
                             <section class="mx-4 newsTextContainer">
@@ -536,10 +534,10 @@ return xml2json(srcDOM)
                     })} else {
                         sb.innerHTML = "";
                     }
-                    let yoy = document.querySelectorAll(".yoy")
+                    let slider = document.querySelectorAll(".slider")
                     let mouseX;
                     let mouseY;
-                    yoy.forEach(element => {
+                    slider.forEach(element => {
                       element.addEventListener('touchend',(e) =>{
                         if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
                           
@@ -565,11 +563,11 @@ return xml2json(srcDOM)
                     });
                 })
             });
-         // }
+         }
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 //bg-black
-//if(sessionStorage.getItem("europe") == "on"){
+if(localStorage.getItem("europe") == "on"){
     
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/travel.xml', {
     
@@ -621,19 +619,9 @@ function xml2json(srcDOM) {
   const parser = new DOMParser();
   const srcDOM = parser.parseFromString(xmlStr, "application/xml");
   
-  // Converting DOM Tree To JSON. 
+
 return xml2json(srcDOM)
-  
-  /** The output will be
-  {
-    "book": {
-      "title": "Some title",
-      "description": "some description",
-      "author": { "id": "1", "name": "some author name" },
-      "review": ["nice book", "this book sucks", "amazing work"]
-    }
-  }
-  */  
+ 
     }
     )
     .then(data=>{
@@ -655,7 +643,7 @@ return xml2json(srcDOM)
                     if (ta.className === "travelAnimation clicked") {
                         data.rss.channel.item.forEach(element => {
                             st.innerHTML += `
-                      <section class="flex justify-between items-center my-6 yoy">
+                      <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
                             <section class="mx-4 newsTextContainer">
@@ -677,10 +665,10 @@ return xml2json(srcDOM)
                     })} else {
                         st.innerHTML = "";
                     }
-                    let yoy = document.querySelectorAll(".yoy")
+                    let slider = document.querySelectorAll(".slider")
                     let mouseX;
                     let mouseY;
-                    yoy.forEach(element => {
+                    slider.forEach(element => {
                       element.addEventListener('touchend',(e) =>{
                         if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
                           
@@ -696,14 +684,8 @@ return xml2json(srcDOM)
                       element.addEventListener('touchstart',(e) =>{
                         mouseX = e.touches[0].clientX
                         mouseY = e.touches[0].clientY
-      
-
                       })
-                      
-                      // element.addEventListener('click', ()=>{
-                      //   element.style.transform = "translateX(-6rem)"
-                      // })
                     });
                 })
             });
-         // }
+         }

@@ -15,7 +15,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 //bg-black
-if (sessionStorage.getItem("europe") == "on") {
+if (localStorage.getItem("europe") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
     method: "GET"
   }).then(function (response) {
@@ -97,9 +97,9 @@ if (sessionStorage.getItem("europe") == "on") {
 
       if (ea.className === "europeAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          se.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0 ekesempel\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
-          var ekesempel = document.querySelectorAll('.ekesempel');
-          ekesempel.forEach(function (E) {
+          se.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0 europaStorage\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          var europaStorage = document.querySelectorAll('.europaStorage');
+          europaStorage.forEach(function (E) {
             E.addEventListener('click', function () {
               var feed;
 
@@ -131,10 +131,10 @@ if (sessionStorage.getItem("europe") == "on") {
       //JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
 
 
-      var yoy = document.querySelectorAll(".yoy");
+      var slider = document.querySelectorAll(".slider");
       var mouseX;
       var mouseY;
-      yoy.forEach(function (element) {
+      slider.forEach(function (element) {
         element.addEventListener('touchend', function (e) {
           if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
             if (e.changedTouches[0].clientX + 100 < mouseX) {
@@ -153,7 +153,7 @@ if (sessionStorage.getItem("europe") == "on") {
 //bg-black
 
 
-if (sessionStorage.getItem("health") == "on") {
+if (localStorage.getItem("health") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Health.xml', {
     method: "GET"
   }).then(function (response) {
@@ -235,16 +235,16 @@ if (sessionStorage.getItem("health") == "on") {
 
       if (ha.className === "healthAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          sh.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          sh.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
         });
       } else {
         sh.innerHTML = "";
       }
 
-      var yoy = document.querySelectorAll(".yoy");
+      var slider = document.querySelectorAll(".slider");
       var mouseX;
       var mouseY;
-      yoy.forEach(function (element) {
+      slider.forEach(function (element) {
         element.addEventListener('touchend', function (e) {
           if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
             if (e.changedTouches[0].clientX + 100 < mouseX) {
@@ -266,7 +266,7 @@ if (sessionStorage.getItem("health") == "on") {
 //bg-black
 
 
-if (sessionStorage.getItem("sport") == "on") {
+if (localStorage.getItem("sport") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml', {
     method: "GET"
   }).then(function (response) {
@@ -348,16 +348,16 @@ if (sessionStorage.getItem("sport") == "on") {
 
       if (sa.className === "sportAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          ss.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          ss.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
         });
       } else {
         ss.innerHTML = "";
       }
 
-      var yoy = document.querySelectorAll(".yoy");
+      var slider = document.querySelectorAll(".slider");
       var mouseX;
       var mouseY;
-      yoy.forEach(function (element) {
+      slider.forEach(function (element) {
         element.addEventListener('touchend', function (e) {
           if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
             if (e.changedTouches[0].clientX + 100 < mouseX) {
@@ -377,7 +377,7 @@ if (sessionStorage.getItem("sport") == "on") {
 //bg-black
 
 
-if (sessionStorage.getItem("business") == "on") {
+if (localStorage.getItem("business") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/business.xml', {
     method: "GET"
   }).then(function (response) {
@@ -459,16 +459,16 @@ if (sessionStorage.getItem("business") == "on") {
 
       if (ba.className === "buisnessAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          sb.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          sb.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
         });
       } else {
         sb.innerHTML = "";
       }
 
-      var yoy = document.querySelectorAll(".yoy");
+      var slider = document.querySelectorAll(".slider");
       var mouseX;
       var mouseY;
-      yoy.forEach(function (element) {
+      slider.forEach(function (element) {
         element.addEventListener('touchend', function (e) {
           if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
             if (e.changedTouches[0].clientX + 100 < mouseX) {
@@ -489,7 +489,7 @@ if (sessionStorage.getItem("business") == "on") {
 //bg-black
 
 
-if (sessionStorage.getItem("travel") == "on") {
+if (localStorage.getItem("travel") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/travel.xml', {
     method: "GET"
   }).then(function (response) {
@@ -571,16 +571,16 @@ if (sessionStorage.getItem("travel") == "on") {
 
       if (ta.className === "travelAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          st.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          st.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
         });
       } else {
         st.innerHTML = "";
       }
 
-      var yoy = document.querySelectorAll(".yoy");
+      var slider = document.querySelectorAll(".slider");
       var mouseX;
       var mouseY;
-      yoy.forEach(function (element) {
+      slider.forEach(function (element) {
         element.addEventListener('touchend', function (e) {
           if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
             if (e.changedTouches[0].clientX + 100 < mouseX) {
