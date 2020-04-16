@@ -98,30 +98,38 @@ if (sessionStorage.getItem("europe") == "on") {
       if (ea.className === "europeAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
           se.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 yoy\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0 ekesempel\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
-          var ekesempel = document.querySelector('.ekesempel');
-          ekesempel.addEventListener('click', function () {
-            var feed;
+          var ekesempel = document.querySelectorAll('.ekesempel');
+          ekesempel.forEach(function (E) {
+            E.addEventListener('click', function () {
+              var feed;
 
-            if (localStorage.getItem("article")) {
-              feed = JSON.parse(localStorage.getItem("article"));
-              feed.push({
-                title: element.title,
-                description: element.description
-              });
-              console.log("hej");
-            } else {
-              feed = [{
-                title: element.title,
-                description: element.description
-              }];
-            }
+              if (localStorage.getItem("article")) {
+                feed = JSON.parse(localStorage.getItem("article"));
+                feed.push({
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                });
+                console.log("hej");
+              } else {
+                feed = [{
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                }];
+              }
 
-            localStorage.setItem("article", JSON.stringify(feed));
+              localStorage.setItem("article", JSON.stringify(feed));
+            });
           });
         });
       } else {
         se.innerHTML = "";
-      }
+      } // skal bruges på archive siden 
+      //JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
+
 
       var yoy = document.querySelectorAll(".yoy");
       var mouseX;

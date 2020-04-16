@@ -1,8 +1,74 @@
 
-  
+  //bg-black
   if(sessionStorage.getItem("europe") == "on"){
     
+    fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
+    
+    method: "GET",
+})
+.then(
+    response=> response.text())
+        .then( xmlStr => {
+    
+      /**
+ * This function coverts a DOM Tree into JavaScript Object. 
+ * @param srcDOM: DOM Tree to be converted. 
+ */
+function xml2json(srcDOM) {
+    let children = [...srcDOM.children];
+  
+    // base case for recursion. 
+    if (!children.length) {
+      return srcDOM.innerHTML
+    }
+  
+    // initializing object to be returned. 
+    let jsonResult = {};
+  
+    for (let child of children) {
+  
+      // checking is child has siblings of same name. 
+      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
+  
+      // if child is array, save the values as array, else as strings. 
+      if (childIsArray) {
+        if (jsonResult[child.nodeName] === undefined) {
+          jsonResult[child.nodeName] = [xml2json(child)];
+        } else {
+          jsonResult[child.nodeName].push(xml2json(child));
+        }
+      } else {
+        jsonResult[child.nodeName] = xml2json(child);
+      }
+    }
+  
+    return jsonResult;
+  }
+  
+  // testing the function
 
+  
+  // converting to DOM Tree
+  const parser = new DOMParser();
+  const srcDOM = parser.parseFromString(xmlStr, "application/xml");
+  
+  // Converting DOM Tree To JSON. 
+return xml2json(srcDOM)
+  
+  /** The output will be
+  {
+    "book": {
+      "title": "Some title",
+      "description": "some description",
+      "author": { "id": "1", "name": "some author name" },
+      "review": ["nice book", "this book sucks", "amazing work"]
+    }
+  }
+  */  
+    }
+    )
+    .then(data=>{
+        console.log(data)
         let e = document.querySelector('#europe')
         e.innerHTML += `
             <figure class="flex items-center">
@@ -19,6 +85,9 @@
                     let se = document.querySelector('#sectioneurope')
                     if (ea.className === "europeAnimation clicked") {
                         data.rss.channel.item.forEach(element => {
+                            if (JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))) {
+                                JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
+                            
                       se.innerHTML += `
                       <section class="flex justify-between items-center my-6 yoy">
                         <figur class="flex items-center w-full flex-shrink-0">
@@ -31,17 +100,18 @@
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                        <img src="/assets/images/delete.png" alt="" class="h-24 w-24 bg-red-600 p-8 flex-shrink-0">
+                            <img src="/assets/images/delete.png" alt="" class="h-24 w-24 bg-red-600 p-8 flex-shrink-0">
                         </figur>
                     </section>
                     </section>
 
                     </section>
                       `;
-
+                    }
                     })} else {
                         se.innerHTML = "";
                     }
+                    
                     let yoy = document.querySelectorAll(".yoy")
                     let mouseX;
                     let mouseY;
@@ -66,7 +136,7 @@
                       })
                     });
                 })
-        
+            });
           }
           
 /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh

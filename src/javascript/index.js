@@ -104,23 +104,25 @@ return xml2json(srcDOM)
 
                     </section>
                       `;
-                     
-                      let ekesempel = document.querySelector('.ekesempel');
-                      ekesempel.addEventListener('click', ()=>{
-                        let feed;
-                        if (localStorage.getItem("article")) {
-                          feed = JSON.parse(localStorage.getItem("article"));
-                          feed.push({title: element.title, description: element.description});
-                          console.log("hej")
-                        }else{
-                          feed = [{title: element.title, description: element.description}];
-                        }
-                        localStorage.setItem("article", JSON.stringify(feed))
-  
-                      })
+                      let ekesempel = document.querySelectorAll('.ekesempel');
+                      ekesempel.forEach(E => {
+                        E.addEventListener('click', ()=>{
+                          let feed;
+                          if (localStorage.getItem("article")) {
+                            feed = JSON.parse(localStorage.getItem("article"));
+                            feed.push({title: element.title, description: element.description, link: element.link, category: data.rss.channel.title.split(" &gt; ").pop()});
+                            console.log("hej")
+                          }else{
+                            feed = [{title: element.title, description: element.description, link: element.link, category: data.rss.channel.title.split(" &gt; ").pop()}];
+                          }
+                          localStorage.setItem("article", JSON.stringify(feed))
+                        })
+                      });
                     })} else {
-                        se.innerHTML = "";
+                      se.innerHTML = "";
                     }
+                    // skal bruges på archive siden 
+                    //JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
                     
                     let yoy = document.querySelectorAll(".yoy")
                     let mouseX;
