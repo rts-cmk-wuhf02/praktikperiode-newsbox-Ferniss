@@ -13946,12 +13946,16 @@ video {
   transition-duration: 1000ms;
 }
 
+/*is being used on the cateogry arrows*/
+
 .clicked{
   -webkit-animation: spinner 1s;
           animation: spinner 1s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
+
+/*is being used on the cateogry arrows*/
 
 .clicked2{
   -webkit-animation: spinner2 1s;

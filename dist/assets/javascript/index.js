@@ -14,7 +14,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//bg-black
 if (localStorage.getItem("europe") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
     method: "GET"
@@ -76,16 +75,6 @@ if (localStorage.getItem("europe") == "on") {
     var srcDOM = parser.parseFromString(xmlStr, "application/xml"); // Converting DOM Tree To JSON. 
 
     return xml2json(srcDOM);
-    /** The output will be
-    {
-      "book": {
-        "title": "Some title",
-        "description": "some description",
-        "author": { "id": "1", "name": "some author name" },
-        "review": ["nice book", "this book sucks", "amazing work"]
-      }
-    }
-    */
   }).then(function (data) {
     console.log(data);
     var e = document.querySelector('#europe');
@@ -150,7 +139,6 @@ if (localStorage.getItem("europe") == "on") {
     });
   });
 } /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-//bg-black
 
 
 if (localStorage.getItem("health") == "on") {
@@ -214,16 +202,6 @@ if (localStorage.getItem("health") == "on") {
     var srcDOM = parser.parseFromString(xmlStr, "application/xml"); // Converting DOM Tree To JSON. 
 
     return xml2json(srcDOM);
-    /** The output will be
-    {
-      "book": {
-        "title": "Some title",
-        "description": "some description",
-        "author": { "id": "1", "name": "some author name" },
-        "review": ["nice book", "this book sucks", "amazing work"]
-      }
-    }
-    */
   }).then(function (data) {
     console.log(data);
     var h = document.querySelector('#health');
@@ -255,15 +233,12 @@ if (localStorage.getItem("health") == "on") {
         element.addEventListener('touchstart', function (e) {
           mouseX = e.touches[0].clientX;
           mouseY = e.touches[0].clientY;
-        }); // element.addEventListener('click', ()=>{
-        //   element.style.transform = "translateX(-6rem)"
-        // })
+        });
       });
     });
   });
 } /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 /////sssssssssssssssssssssssssssssssssssssssssssss
-//bg-black
 
 
 if (localStorage.getItem("sport") == "on") {
@@ -327,16 +302,6 @@ if (localStorage.getItem("sport") == "on") {
     var srcDOM = parser.parseFromString(xmlStr, "application/xml"); // Converting DOM Tree To JSON. 
 
     return xml2json(srcDOM);
-    /** The output will be
-    {
-      "book": {
-        "title": "Some title",
-        "description": "some description",
-        "author": { "id": "1", "name": "some author name" },
-        "review": ["nice book", "this book sucks", "amazing work"]
-      }
-    }
-    */
   }).then(function (data) {
     console.log(data);
     var s = document.querySelector('#sport');
@@ -374,7 +339,6 @@ if (localStorage.getItem("sport") == "on") {
   });
 } /////sssssssssssssssssssssssssssssssssssssssssssss 
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-//bg-black
 
 
 if (localStorage.getItem("business") == "on") {
@@ -438,16 +402,6 @@ if (localStorage.getItem("business") == "on") {
     var srcDOM = parser.parseFromString(xmlStr, "application/xml"); // Converting DOM Tree To JSON. 
 
     return xml2json(srcDOM);
-    /** The output will be
-    {
-      "book": {
-        "title": "Some title",
-        "description": "some description",
-        "author": { "id": "1", "name": "some author name" },
-        "review": ["nice book", "this book sucks", "amazing work"]
-      }
-    }
-    */
   }).then(function (data) {
     console.log(data);
     var b = document.querySelector('#buisness');
@@ -479,14 +433,11 @@ if (localStorage.getItem("business") == "on") {
         element.addEventListener('touchstart', function (e) {
           mouseX = e.touches[0].clientX;
           mouseY = e.touches[0].clientY;
-        }); // element.addEventListener('click', ()=>{
-        //   element.style.transform = "translateX(-6rem)"
-        // })
+        });
       });
     });
   });
 } /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-//bg-black
 
 
 if (localStorage.getItem("travel") == "on") {
@@ -542,24 +493,13 @@ if (localStorage.getItem("travel") == "on") {
       }
 
       return jsonResult;
-    } // testing the function
-    // converting to DOM Tree
+    } // converting to DOM Tree
 
 
     var parser = new DOMParser();
     var srcDOM = parser.parseFromString(xmlStr, "application/xml"); // Converting DOM Tree To JSON. 
 
     return xml2json(srcDOM);
-    /** The output will be
-    {
-      "book": {
-        "title": "Some title",
-        "description": "some description",
-        "author": { "id": "1", "name": "some author name" },
-        "review": ["nice book", "this book sucks", "amazing work"]
-      }
-    }
-    */
   }).then(function (data) {
     console.log(data);
     var t = document.querySelector('#travel');
@@ -591,9 +531,7 @@ if (localStorage.getItem("travel") == "on") {
         element.addEventListener('touchstart', function (e) {
           mouseX = e.touches[0].clientX;
           mouseY = e.touches[0].clientY;
-        }); // element.addEventListener('click', ()=>{
-        //   element.style.transform = "translateX(-6rem)"
-        // })
+        });
       });
     });
   });
