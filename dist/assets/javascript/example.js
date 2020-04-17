@@ -14,7 +14,49 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-array.forEach(function (element) {}); /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+var e = document.querySelector('#europe');
+e.innerHTML += "\n            <figure class=\"flex items-center\">\n            <img src=\"/assets/images/tema.png\" alt=\"\" class=\"w-12 h-12 p-2\">\n            <h1>EUROPE</h1>\n            </figure>\n            <figure class=\"pr-10\">\n            <img class=\"europeAnimation\" src=\"/assets/images/Arow.png\" alt=\"\">\n            </figure>\n            ";
+var ea = document.querySelector('.europeAnimation');
+e.addEventListener("click", function () {
+  ea.classList.toggle('clicked');
+  var se = document.querySelector('#sectioneurope');
+
+  if (ea.className === "europeAnimation clicked") {
+    JSON.parse(localStorage.getItem("article")).forEach(function (element) {
+      se.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                        <img src=\"/assets/images/delete.png\" alt=\"\" class=\"h-24 w-24 bg-red-600 p-8 flex-shrink-0 europaStorage\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+      var europaStorage = document.querySelectorAll('.europaStorage');
+      europaStorage.forEach(function (E) {
+        E.addEventListener('click', function () {
+          var index = JSON.parse(localStorage.getItem("article")).findIndex(function (x) {
+            return x.title === element.title;
+          });
+          storage.splice(index, 1);
+          localStorage.setItem('articles', JSON.stringify(storage));
+          e.currentTarget.remove();
+        });
+      });
+    });
+  } // skal bruges på archive siden 
+  //JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
+
+
+  var slider = document.querySelectorAll(".slider");
+  var mouseX;
+  var mouseY;
+  slider.forEach(function (element) {
+    element.addEventListener('touchend', function (e) {
+      if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
+        if (e.changedTouches[0].clientX + 100 < mouseX) {
+          element.style.transform = "translateX(-6rem)";
+        } else if (e.changedTouches[0].clientX - 100 > mouseX) element.style.transform = "translateX(0)";
+      }
+    });
+    element.addEventListener('touchstart', function (e) {
+      mouseX = e.touches[0].clientX;
+      mouseY = e.touches[0].clientY;
+    });
+  });
+}); /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 
 if (localStorage.getItem("health") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Health.xml', {
@@ -23,9 +65,9 @@ if (localStorage.getItem("health") == "on") {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -116,16 +158,16 @@ if (localStorage.getItem("health") == "on") {
 /////sssssssssssssssssssssssssssssssssssssssssssss
 
 
-if (localStorage.getItem("europe") == "on") {
+if (localStorage.getItem("sport") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml', {
     method: "GET"
   }).then(function (response) {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -188,7 +230,7 @@ if (localStorage.getItem("europe") == "on") {
 
       if (sa.className === "sportAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          ss.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                        <img src=\"/assets/images/delete.png\" alt=\"\" class=\"h-24 w-24 bg-red-600 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          ss.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
         });
       } else {
         ss.innerHTML = "";
@@ -216,16 +258,16 @@ if (localStorage.getItem("europe") == "on") {
 /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 
-if (localStorage.getItem("europe") == "on") {
+if (localStorage.getItem("business") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/business.xml', {
     method: "GET"
   }).then(function (response) {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -288,7 +330,7 @@ if (localStorage.getItem("europe") == "on") {
 
       if (ba.className === "buisnessAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          sb.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                        <img src=\"/assets/images/delete.png\" alt=\"\" class=\"h-24 w-24 bg-red-600 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          sb.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
         });
       } else {
         sb.innerHTML = "";
@@ -315,16 +357,16 @@ if (localStorage.getItem("europe") == "on") {
 } /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 
-if (localStorage.getItem("europe") == "on") {
+if (localStorage.getItem("travel") == "on") {
   fetch('https://rss.nytimes.com/services/xml/rss/nyt/travel.xml', {
     method: "GET"
   }).then(function (response) {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -368,12 +410,12 @@ if (localStorage.getItem("europe") == "on") {
       }
 
       return jsonResult;
-    } // testing the function
-    // converting to DOM Tree
+    } // converting to DOM Tree
 
 
     var parser = new DOMParser();
-    var srcDOM = parser.parseFromString(xmlStr, "application/xml");
+    var srcDOM = parser.parseFromString(xmlStr, "application/xml"); // Converting DOM Tree To JSON. 
+
     return xml2json(srcDOM);
   }).then(function (data) {
     console.log(data);
@@ -386,7 +428,7 @@ if (localStorage.getItem("europe") == "on") {
 
       if (ta.className === "travelAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          st.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                        <img src=\"/assets/images/delete.png\" alt=\"\" class=\"h-24 w-24 bg-red-600 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          st.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
         });
       } else {
         st.innerHTML = "";
