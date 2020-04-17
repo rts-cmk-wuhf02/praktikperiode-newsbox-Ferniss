@@ -1,60 +1,59 @@
-  if(localStorage.getItem("europe") == "on"){
-    
-    fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
-    
-    method: "GET",
-})
-.then(
-    response=> response.text())
-        .then( xmlStr => {
-    
-      /**
- * This function coverts a DOM Tree into JavaScript Object. 
- * @param srcDOM: DOM Tree to be converted. 
- */
-function xml2json(srcDOM) {
-    let children = [...srcDOM.children];
-  
-    // base case for recursion. 
-    if (!children.length) {
-      return srcDOM.innerHTML
-    }
-  
-    // initializing object to be returned. 
-    let jsonResult = {};
-  
-    for (let child of children) {
-  
-      // checking is child has siblings of same name. 
-      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
-  
-      // if child is array, save the values as array, else as strings. 
-      if (childIsArray) {
-        if (jsonResult[child.nodeName] === undefined) {
-          jsonResult[child.nodeName] = [xml2json(child)];
-        } else {
-          jsonResult[child.nodeName].push(xml2json(child));
-        }
-      } else {
-        jsonResult[child.nodeName] = xml2json(child);
-      }
-    }
-  
-    return jsonResult;
-  }
-  
-  // testing the function
+  if (localStorage.getItem("europe") == "on") {
 
-  
-  // converting to DOM Tree
-  const parser = new DOMParser();
-  const srcDOM = parser.parseFromString(xmlStr, "application/xml");
-  
-  // Converting DOM Tree To JSON. 
-return xml2json(srcDOM)  
-    }
-    )
-    .then(data=>{
+    fetch('https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml', {
+
+        method: "GET",
+      })
+      .then(
+        response => response.text())
+      .then(xmlStr => {
+
+        /**
+         * This function coverts a DOM Tree into JavaScript Object. 
+         * @param srcDOM: DOM Tree to be converted. 
+         */
+        function xml2json(srcDOM) {
+          let children = [...srcDOM.children];
+
+          // base case for recursion. 
+          if (!children.length) {
+            return srcDOM.innerHTML
+          }
+
+          // initializing object to be returned. 
+          let jsonResult = {};
+
+          for (let child of children) {
+
+            // checking is child has siblings of same name. 
+            let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
+
+            // if child is array, save the values as array, else as strings. 
+            if (childIsArray) {
+              if (jsonResult[child.nodeName] === undefined) {
+                jsonResult[child.nodeName] = [xml2json(child)];
+              } else {
+                jsonResult[child.nodeName].push(xml2json(child));
+              }
+            } else {
+              jsonResult[child.nodeName] = xml2json(child);
+            }
+          }
+
+          return jsonResult;
+        }
+
+        // testing the function
+
+
+        // converting to DOM Tree
+        const parser = new DOMParser();
+        const srcDOM = parser.parseFromString(xmlStr, "application/xml");
+
+        // Converting DOM Tree To JSON. 
+        return xml2json(srcDOM)
+      })
+      .then(data => {
         console.log(data)
         let e = document.querySelector('#europe')
         e.innerHTML += `
@@ -66,13 +65,13 @@ return xml2json(srcDOM)
             <img class="europeAnimation" src="/assets/images/Arow.png" alt="">
             </figure>
             `
-            let ea = document.querySelector('.europeAnimation')
-                e.addEventListener("click", () =>{
-                    ea.classList.toggle('clicked')
-                    let se = document.querySelector('#sectioneurope')
-                    if (ea.className === "europeAnimation clicked") {
-                        data.rss.channel.item.forEach(element => {
-                      se.innerHTML += `
+        let ea = document.querySelector('.europeAnimation')
+        e.addEventListener("click", () => {
+          ea.classList.toggle('clicked')
+          let se = document.querySelector('#sectioneurope')
+          if (ea.className === "europeAnimation clicked") {
+            data.rss.channel.item.forEach(element => {
+              se.innerHTML += `
                       <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
@@ -91,112 +90,120 @@ return xml2json(srcDOM)
 
                     </section>
                       `;
-                      let europaStorage = document.querySelectorAll('.europaStorage');
-                      europaStorage.forEach(E => {
-                        E.addEventListener('click', ()=>{
-                          let feed;
-                          if (localStorage.getItem("article")) {
-                            feed = JSON.parse(localStorage.getItem("article"));
-                            feed.push({title: element.title, description: element.description, link: element.link, category: data.rss.channel.title.split(" &gt; ").pop()});
-                            console.log("hej")
-                          }else{
-                            feed = [{title: element.title, description: element.description, link: element.link, category: data.rss.channel.title.split(" &gt; ").pop()}];
-                          }
-                          localStorage.setItem("article", JSON.stringify(feed))
-                        })
-                      });
-                    })} else {
-                      se.innerHTML = "";
-                    }
-                    // skal bruges på archive siden 
-                    //JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
-                    
-                    let slider = document.querySelectorAll(".slider")
-                    let mouseX;
-                    let mouseY;
-                    slider.forEach(element => {
-                      element.addEventListener('touchend',(e) =>{
-                        if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
-                          
-                          if (e.changedTouches[0].clientX + 100 < mouseX) {
-                          
-                            element.style.transform = "translateX(-6rem)"
-                          }else if(e.changedTouches[0].clientX - 100 > mouseX)
-                          element.style.transform = "translateX(0)"
-                        }
-                        
-
-                      })
-                      element.addEventListener('touchstart',(e) =>{
-                        mouseX = e.touches[0].clientX
-                        mouseY = e.touches[0].clientY
-      
-
-                      })
+              let europaStorage = document.querySelectorAll('.europaStorage');
+              europaStorage.forEach(E => {
+                E.addEventListener('click', () => {
+                  let feed;
+                  if (localStorage.getItem("article")) {
+                    feed = JSON.parse(localStorage.getItem("article"));
+                    feed.push({
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
                     });
+                    console.log("hej")
+                  } else {
+                    feed = [{
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
+                    }];
+                  }
+                  localStorage.setItem("article", JSON.stringify(feed))
                 })
-            });
+              });
+            })
+          } else {
+            se.innerHTML = "";
           }
-          
-/////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 
-if(localStorage.getItem("health") == "on"){
-    
-  fetch('https://rss.nytimes.com/services/xml/rss/nyt/Health.xml', {
-    
-    method: "GET",
-})
-.then(
-    response=> response.text())
-        .then( xmlStr => {
-    
-      /**
- * This function coverts a DOM Tree into JavaScript Object. 
- * @param srcDOM: DOM Tree to be converted. 
- */
-function xml2json(srcDOM) {
-    let children = [...srcDOM.children];
-  
-    // base case for recursion. 
-    if (!children.length) {
-      return srcDOM.innerHTML
-    }
-  
-    // initializing object to be returned. 
-    let jsonResult = {};
-  
-    for (let child of children) {
-  
-      // checking is child has siblings of same name. 
-      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
-  
-      // if child is array, save the values as array, else as strings. 
-      if (childIsArray) {
-        if (jsonResult[child.nodeName] === undefined) {
-          jsonResult[child.nodeName] = [xml2json(child)];
-        } else {
-          jsonResult[child.nodeName].push(xml2json(child));
-        }
-      } else {
-        jsonResult[child.nodeName] = xml2json(child);
-      }
-    }
-  
-    return jsonResult;
+          let slider = document.querySelectorAll(".slider")
+          let mouseX;
+          let mouseY;
+          slider.forEach(element => {
+            element.addEventListener('touchend', (e) => {
+              if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
+
+                if (e.changedTouches[0].clientX + 100 < mouseX) {
+
+                  element.style.transform = "translateX(-6rem)"
+                } else if (e.changedTouches[0].clientX - 100 > mouseX)
+                  element.style.transform = "translateX(0)"
+              }
+
+
+            })
+            element.addEventListener('touchstart', (e) => {
+              mouseX = e.touches[0].clientX
+              mouseY = e.touches[0].clientY
+
+
+            })
+          });
+        })
+      });
   }
-  
-  // testing the function
 
-  
-  // converting to DOM Tree
-  const parser = new DOMParser();
-  const srcDOM = parser.parseFromString(xmlStr, "application/xml");
-  
-  // Converting DOM Tree To JSON. 
-return xml2json(srcDOM)
-    }
-    )
-    .then(data=>{
+  /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+
+  if (localStorage.getItem("health") == "on") {
+
+    fetch('https://rss.nytimes.com/services/xml/rss/nyt/Health.xml', {
+
+        method: "GET",
+      })
+      .then(
+        response => response.text())
+      .then(xmlStr => {
+
+        /**
+         * This function coverts a DOM Tree into JavaScript Object. 
+         * @param srcDOM: DOM Tree to be converted. 
+         */
+        function xml2json(srcDOM) {
+          let children = [...srcDOM.children];
+
+          // base case for recursion. 
+          if (!children.length) {
+            return srcDOM.innerHTML
+          }
+
+          // initializing object to be returned. 
+          let jsonResult = {};
+
+          for (let child of children) {
+
+            // checking is child has siblings of same name. 
+            let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
+
+            // if child is array, save the values as array, else as strings. 
+            if (childIsArray) {
+              if (jsonResult[child.nodeName] === undefined) {
+                jsonResult[child.nodeName] = [xml2json(child)];
+              } else {
+                jsonResult[child.nodeName].push(xml2json(child));
+              }
+            } else {
+              jsonResult[child.nodeName] = xml2json(child);
+            }
+          }
+
+          return jsonResult;
+        }
+
+        // testing the function
+
+
+        // converting to DOM Tree
+        const parser = new DOMParser();
+        const srcDOM = parser.parseFromString(xmlStr, "application/xml");
+
+        // Converting DOM Tree To JSON. 
+        return xml2json(srcDOM)
+      })
+      .then(data => {
         console.log(data)
         let h = document.querySelector('#health')
         h.innerHTML += `
@@ -208,13 +215,13 @@ return xml2json(srcDOM)
         <img class="healthAnimation" src="/assets/images/Arow.png" alt="">
         </figure>
             `
-            let ha = document.querySelector('.healthAnimation')
-                h.addEventListener("click", () =>{
-                    ha.classList.toggle('clicked')
-                    let sh = document.querySelector('#sectionhealth')
-                    if (ha.className === "healthAnimation clicked") {
-                        data.rss.channel.item.forEach(element => {
-                      sh.innerHTML += `
+        let ha = document.querySelector('.healthAnimation')
+        h.addEventListener("click", () => {
+          ha.classList.toggle('clicked')
+          let sh = document.querySelector('#sectionhealth')
+          if (ha.className === "healthAnimation clicked") {
+            data.rss.channel.item.forEach(element => {
+              sh.innerHTML += `
                       <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
@@ -226,7 +233,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0 healthStorage">
                         </figur>
                     </section>
                     </section>
@@ -234,98 +241,124 @@ return xml2json(srcDOM)
                     </section>
                       `;
 
-                    })} else {
-                        sh.innerHTML = "";
-                    }
-                    let slider = document.querySelectorAll(".slider")
-                    let mouseX;
-                    let mouseY;
-                    slider.forEach(element => {
-                      element.addEventListener('touchend',(e) =>{
-                        if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
-                          
-                          if (e.changedTouches[0].clientX + 100 < mouseX) {
-                          
-                            element.style.transform = "translateX(-6rem)"
-                          }else if(e.changedTouches[0].clientX - 100 > mouseX)
-                          element.style.transform = "translateX(0)"
-                        }
-                        
-
-                      })
-                      element.addEventListener('touchstart',(e) =>{
-                        mouseX = e.touches[0].clientX
-                        mouseY = e.touches[0].clientY
-      
-
-                      })
+              let healthStorage = document.querySelectorAll('.healthStorage');
+              healthStorage.forEach(E => {
+                E.addEventListener('click', () => {
+                  let feed;
+                  if (localStorage.getItem("article")) {
+                    feed = JSON.parse(localStorage.getItem("article"));
+                    feed.push({
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
                     });
+                    console.log("hej")
+                  } else {
+                    feed = [{
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
+                    }];
+                  }
+                  localStorage.setItem("article", JSON.stringify(feed))
                 })
-            });
-         }
-    
-/////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+              });
+            })
+          } else {
+            se.innerHTML = "";
+          }
 
 
+          let slider = document.querySelectorAll(".slider")
+          let mouseX;
+          let mouseY;
+          slider.forEach(element => {
+            element.addEventListener('touchend', (e) => {
+              if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
 
-/////sssssssssssssssssssssssssssssssssssssssssssss
-if(localStorage.getItem("sport") == "on"){
-    
-  fetch('https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml', {
-    
-    method: "GET",
-})
-.then(
-    response=> response.text())
-        .then( xmlStr => {
-    
-      /**
- * This function coverts a DOM Tree into JavaScript Object. 
- * @param srcDOM: DOM Tree to be converted. 
- */
-function xml2json(srcDOM) {
-    let children = [...srcDOM.children];
-  
-    // base case for recursion. 
-    if (!children.length) {
-      return srcDOM.innerHTML
-    }
-  
-    // initializing object to be returned. 
-    let jsonResult = {};
-  
-    for (let child of children) {
-  
-      // checking is child has siblings of same name. 
-      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
-  
-      // if child is array, save the values as array, else as strings. 
-      if (childIsArray) {
-        if (jsonResult[child.nodeName] === undefined) {
-          jsonResult[child.nodeName] = [xml2json(child)];
-        } else {
-          jsonResult[child.nodeName].push(xml2json(child));
-        }
-      } else {
-        jsonResult[child.nodeName] = xml2json(child);
-      }
-    }
-  
-    return jsonResult;
+                if (e.changedTouches[0].clientX + 100 < mouseX) {
+
+                  element.style.transform = "translateX(-6rem)"
+                } else if (e.changedTouches[0].clientX - 100 > mouseX)
+                  element.style.transform = "translateX(0)"
+              }
+
+
+            })
+            element.addEventListener('touchstart', (e) => {
+              mouseX = e.touches[0].clientX
+              mouseY = e.touches[0].clientY
+
+
+            })
+          });
+        })
+      });
   }
-  
-  // testing the function
 
-  
-  // converting to DOM Tree
-  const parser = new DOMParser();
-  const srcDOM = parser.parseFromString(xmlStr, "application/xml");
-  
-  // Converting DOM Tree To JSON. 
-return xml2json(srcDOM) 
-    }
-    )
-    .then(data=>{
+  /////hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+
+
+
+  /////sssssssssssssssssssssssssssssssssssssssssssss
+  if (localStorage.getItem("sport") == "on") {
+
+    fetch('https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml', {
+
+        method: "GET",
+      })
+      .then(
+        response => response.text())
+      .then(xmlStr => {
+
+        /**
+         * This function coverts a DOM Tree into JavaScript Object. 
+         * @param srcDOM: DOM Tree to be converted. 
+         */
+        function xml2json(srcDOM) {
+          let children = [...srcDOM.children];
+
+          // base case for recursion. 
+          if (!children.length) {
+            return srcDOM.innerHTML
+          }
+
+          // initializing object to be returned. 
+          let jsonResult = {};
+
+          for (let child of children) {
+
+            // checking is child has siblings of same name. 
+            let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
+
+            // if child is array, save the values as array, else as strings. 
+            if (childIsArray) {
+              if (jsonResult[child.nodeName] === undefined) {
+                jsonResult[child.nodeName] = [xml2json(child)];
+              } else {
+                jsonResult[child.nodeName].push(xml2json(child));
+              }
+            } else {
+              jsonResult[child.nodeName] = xml2json(child);
+            }
+          }
+
+          return jsonResult;
+        }
+
+        // testing the function
+
+
+        // converting to DOM Tree
+        const parser = new DOMParser();
+        const srcDOM = parser.parseFromString(xmlStr, "application/xml");
+
+        // Converting DOM Tree To JSON. 
+        return xml2json(srcDOM)
+      })
+      .then(data => {
         console.log(data)
         let s = document.querySelector('#sport')
         s.innerHTML += `
@@ -337,13 +370,13 @@ return xml2json(srcDOM)
         <img class="sportAnimation" src="/assets/images/Arow.png" alt="">
         </figure>
         `
-            let sa = document.querySelector('.sportAnimation')
-                s.addEventListener("click", () =>{
-                    sa.classList.toggle('clicked')
-                    let ss = document.querySelector('#sectionsport')
-                    if (sa.className === "sportAnimation clicked") {
-                        data.rss.channel.item.forEach(element => {
-                      ss.innerHTML += `
+        let sa = document.querySelector('.sportAnimation')
+        s.addEventListener("click", () => {
+          sa.classList.toggle('clicked')
+          let ss = document.querySelector('#sectionsport')
+          if (sa.className === "sportAnimation clicked") {
+            data.rss.channel.item.forEach(element => {
+              ss.innerHTML += `
                       <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
@@ -355,7 +388,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0 sportStorage">
                         </figur>
                     </section>
                     </section>
@@ -363,98 +396,123 @@ return xml2json(srcDOM)
                     </section>
                       `;
 
-                    })} else {
-                        ss.innerHTML = "";
-                    }
-                    let slider = document.querySelectorAll(".slider")
-                    let mouseX;
-                    let mouseY;
-                    slider.forEach(element => {
-                      element.addEventListener('touchend',(e) =>{
-                        if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
-                          
-                          if (e.changedTouches[0].clientX + 100 < mouseX) {
-                          
-                            element.style.transform = "translateX(-6rem)"
-                          }else if(e.changedTouches[0].clientX - 100 > mouseX)
-                          element.style.transform = "translateX(0)"
-                        }
-                        
-
-                      })
-                      element.addEventListener('touchstart',(e) =>{
-                        mouseX = e.touches[0].clientX
-                        mouseY = e.touches[0].clientY
-      
-
-                      })
+              let sportStorage = document.querySelectorAll('.sportStorage');
+              sportStorage.forEach(E => {
+                E.addEventListener('click', () => {
+                  let feed;
+                  if (localStorage.getItem("article")) {
+                    feed = JSON.parse(localStorage.getItem("article"));
+                    feed.push({
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
                     });
+                    console.log("hej")
+                  } else {
+                    feed = [{
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
+                    }];
+                  }
+                  localStorage.setItem("article", JSON.stringify(feed))
                 })
-            });
-         }
-/////sssssssssssssssssssssssssssssssssssssssssssss 
+              });
+            })
+          } else {
+            se.innerHTML = "";
+          }
+
+          let slider = document.querySelectorAll(".slider")
+          let mouseX;
+          let mouseY;
+          slider.forEach(element => {
+            element.addEventListener('touchend', (e) => {
+              if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
+
+                if (e.changedTouches[0].clientX + 100 < mouseX) {
+
+                  element.style.transform = "translateX(-6rem)"
+                } else if (e.changedTouches[0].clientX - 100 > mouseX)
+                  element.style.transform = "translateX(0)"
+              }
 
 
+            })
+            element.addEventListener('touchstart', (e) => {
+              mouseX = e.touches[0].clientX
+              mouseY = e.touches[0].clientY
 
 
-/////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-if(localStorage.getItem("business") == "on"){
-    
-  fetch('https://rss.nytimes.com/services/xml/rss/nyt/business.xml', {
-    
-    method: "GET",
-})
-.then(
-    response=> response.text())
-        .then( xmlStr => {
-    
-      /**
- * This function coverts a DOM Tree into JavaScript Object. 
- * @param srcDOM: DOM Tree to be converted. 
- */
-function xml2json(srcDOM) {
-    let children = [...srcDOM.children];
-  
-    // base case for recursion. 
-    if (!children.length) {
-      return srcDOM.innerHTML
-    }
-  
-    // initializing object to be returned. 
-    let jsonResult = {};
-  
-    for (let child of children) {
-  
-      // checking is child has siblings of same name. 
-      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
-  
-      // if child is array, save the values as array, else as strings. 
-      if (childIsArray) {
-        if (jsonResult[child.nodeName] === undefined) {
-          jsonResult[child.nodeName] = [xml2json(child)];
-        } else {
-          jsonResult[child.nodeName].push(xml2json(child));
-        }
-      } else {
-        jsonResult[child.nodeName] = xml2json(child);
-      }
-    }
-  
-    return jsonResult;
+            })
+          });
+        })
+      });
   }
-  
-  // testing the function
+  /////sssssssssssssssssssssssssssssssssssssssssssss 
 
-  
-  // converting to DOM Tree
-  const parser = new DOMParser();
-  const srcDOM = parser.parseFromString(xmlStr, "application/xml");
-  
-  // Converting DOM Tree To JSON. 
-return xml2json(srcDOM) 
-    }
-    )
-    .then(data=>{
+
+
+
+  /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  if (localStorage.getItem("business") == "on") {
+
+    fetch('https://rss.nytimes.com/services/xml/rss/nyt/business.xml', {
+
+        method: "GET",
+      })
+      .then(
+        response => response.text())
+      .then(xmlStr => {
+
+        /**
+         * This function coverts a DOM Tree into JavaScript Object. 
+         * @param srcDOM: DOM Tree to be converted. 
+         */
+        function xml2json(srcDOM) {
+          let children = [...srcDOM.children];
+
+          // base case for recursion. 
+          if (!children.length) {
+            return srcDOM.innerHTML
+          }
+
+          // initializing object to be returned. 
+          let jsonResult = {};
+
+          for (let child of children) {
+
+            // checking is child has siblings of same name. 
+            let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
+
+            // if child is array, save the values as array, else as strings. 
+            if (childIsArray) {
+              if (jsonResult[child.nodeName] === undefined) {
+                jsonResult[child.nodeName] = [xml2json(child)];
+              } else {
+                jsonResult[child.nodeName].push(xml2json(child));
+              }
+            } else {
+              jsonResult[child.nodeName] = xml2json(child);
+            }
+          }
+
+          return jsonResult;
+        }
+
+        // testing the function
+
+
+        // converting to DOM Tree
+        const parser = new DOMParser();
+        const srcDOM = parser.parseFromString(xmlStr, "application/xml");
+
+        // Converting DOM Tree To JSON. 
+        return xml2json(srcDOM)
+      })
+      .then(data => {
         console.log(data)
         let b = document.querySelector('#buisness')
         b.innerHTML += `
@@ -466,13 +524,13 @@ return xml2json(srcDOM)
             <img class="buisnessAnimation" src="/assets/images/Arow.png" alt="">
         </figure>
             `
-            let ba = document.querySelector('.buisnessAnimation')
-                b.addEventListener("click", () =>{
-                    ba.classList.toggle('clicked')
-                    let sb = document.querySelector('#sectionbuisness')
-                    if (ba.className === "buisnessAnimation clicked") {
-                        data.rss.channel.item.forEach(element => {
-                      sb.innerHTML += `
+        let ba = document.querySelector('.buisnessAnimation')
+        b.addEventListener("click", () => {
+          ba.classList.toggle('clicked')
+          let sb = document.querySelector('#sectionbuisness')
+          if (ba.className === "buisnessAnimation clicked") {
+            data.rss.channel.item.forEach(element => {
+              sb.innerHTML += `
                       <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
@@ -484,7 +542,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0 buisnessStorage">
                         </figur>
                     </section>
                     </section>
@@ -492,91 +550,117 @@ return xml2json(srcDOM)
                     </section>
                       `;
 
-                    })} else {
-                        sb.innerHTML = "";
-                    }
-                    let slider = document.querySelectorAll(".slider")
-                    let mouseX;
-                    let mouseY;
-                    slider.forEach(element => {
-                      element.addEventListener('touchend',(e) =>{
-                        if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
-                          
-                          if (e.changedTouches[0].clientX + 100 < mouseX) {
-                          
-                            element.style.transform = "translateX(-6rem)"
-                          }else if(e.changedTouches[0].clientX - 100 > mouseX)
-                          element.style.transform = "translateX(0)"
-                        }
-                        
-
-                      })
-                      element.addEventListener('touchstart',(e) =>{
-                        mouseX = e.touches[0].clientX
-                        mouseY = e.touches[0].clientY
-      
-
-                      })
+              let buisnessStorage = document.querySelectorAll('.buisnessStorage');
+              buisnessStorage.forEach(E => {
+                E.addEventListener('click', () => {
+                  let feed;
+                  if (localStorage.getItem("article")) {
+                    feed = JSON.parse(localStorage.getItem("article"));
+                    feed.push({
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
                     });
+                    console.log("hej")
+                  } else {
+                    feed = [{
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
+                    }];
+                  }
+                  localStorage.setItem("article", JSON.stringify(feed))
                 })
-            });
+              });
+            })
+          } else {
+            se.innerHTML = "";
           }
-/////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-if(localStorage.getItem("travel") == "on"){
-    
-  fetch('https://rss.nytimes.com/services/xml/rss/nyt/travel.xml', {
-    
-    method: "GET",
-})
-.then(
-    response=> response.text())
-        .then( xmlStr => {
-    
-      /**
- * This function coverts a DOM Tree into JavaScript Object. 
- * @param srcDOM: DOM Tree to be converted. 
- */
-function xml2json(srcDOM) {
-    let children = [...srcDOM.children];
-  
-    // base case for recursion. 
-    if (!children.length) {
-      return srcDOM.innerHTML
-    }
-  
-    // initializing object to be returned. 
-    let jsonResult = {};
-  
-    for (let child of children) {
-  
-      // checking is child has siblings of same name. 
-      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
-  
-      // if child is array, save the values as array, else as strings. 
-      if (childIsArray) {
-        if (jsonResult[child.nodeName] === undefined) {
-          jsonResult[child.nodeName] = [xml2json(child)];
-        } else {
-          jsonResult[child.nodeName].push(xml2json(child));
-        }
-      } else {
-        jsonResult[child.nodeName] = xml2json(child);
-      }
-    }
-  
-    return jsonResult;
+
+          let slider = document.querySelectorAll(".slider")
+          let mouseX;
+          let mouseY;
+          slider.forEach(element => {
+            element.addEventListener('touchend', (e) => {
+              if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
+
+                if (e.changedTouches[0].clientX + 100 < mouseX) {
+
+                  element.style.transform = "translateX(-6rem)"
+                } else if (e.changedTouches[0].clientX - 100 > mouseX)
+                  element.style.transform = "translateX(0)"
+              }
+
+
+            })
+            element.addEventListener('touchstart', (e) => {
+              mouseX = e.touches[0].clientX
+              mouseY = e.touches[0].clientY
+
+
+            })
+          });
+        })
+      });
   }
 
-  
-  // converting to DOM Tree
-  const parser = new DOMParser();
-  const srcDOM = parser.parseFromString(xmlStr, "application/xml");
-  
-  // Converting DOM Tree To JSON. 
-return xml2json(srcDOM)
-    }
-    )
-    .then(data=>{
+  /////bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  if (localStorage.getItem("travel") == "on") {
+
+    fetch('https://rss.nytimes.com/services/xml/rss/nyt/travel.xml', {
+
+        method: "GET",
+      })
+      .then(
+        response => response.text())
+      .then(xmlStr => {
+
+        /**
+         * This function coverts a DOM Tree into JavaScript Object. 
+         * @param srcDOM: DOM Tree to be converted. 
+         */
+        function xml2json(srcDOM) {
+          let children = [...srcDOM.children];
+
+          // base case for recursion. 
+          if (!children.length) {
+            return srcDOM.innerHTML
+          }
+
+          // initializing object to be returned. 
+          let jsonResult = {};
+
+          for (let child of children) {
+
+            // checking is child has siblings of same name. 
+            let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
+
+            // if child is array, save the values as array, else as strings. 
+            if (childIsArray) {
+              if (jsonResult[child.nodeName] === undefined) {
+                jsonResult[child.nodeName] = [xml2json(child)];
+              } else {
+                jsonResult[child.nodeName].push(xml2json(child));
+              }
+            } else {
+              jsonResult[child.nodeName] = xml2json(child);
+            }
+          }
+
+          return jsonResult;
+        }
+
+
+        // converting to DOM Tree
+        const parser = new DOMParser();
+        const srcDOM = parser.parseFromString(xmlStr, "application/xml");
+
+        // Converting DOM Tree To JSON. 
+        return xml2json(srcDOM)
+      })
+      .then(data => {
         console.log(data)
         let t = document.querySelector('#travel')
         t.innerHTML += `
@@ -588,13 +672,13 @@ return xml2json(srcDOM)
             <img class="travelAnimation" src="/assets/images/Arow.png" alt="">
         </figure>
             `
-            let ta = document.querySelector('.travelAnimation')
-                t.addEventListener("click", () =>{
-                    ta.classList.toggle('clicked')
-                    let st = document.querySelector('#sectiontravel')
-                    if (ta.className === "travelAnimation clicked") {
-                        data.rss.channel.item.forEach(element => {
-                            st.innerHTML += `
+        let ta = document.querySelector('.travelAnimation')
+        t.addEventListener("click", () => {
+          ta.classList.toggle('clicked')
+          let st = document.querySelector('#sectiontravel')
+          if (ta.className === "travelAnimation clicked") {
+            data.rss.channel.item.forEach(element => {
+              st.innerHTML += `
                       <section class="flex justify-between items-center my-6 slider">
                         <figur class="flex items-center w-full flex-shrink-0">
                             <img src="/assets/images/undertema.png" alt="" class="rounded-full h-16 w-16 ml-8">
@@ -606,7 +690,7 @@ return xml2json(srcDOM)
                             </section>
                         </figur>
                         <figur class="flex items-center justify-center flex-shrink-0">
-                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0">
+                            <img src="/assets/images/archive.png" alt="" class="h-24 w-24 bg-teal-400 p-8 flex-shrink-0 travelStorage">
                         </figur>
                     </section>
                     </section>
@@ -614,32 +698,58 @@ return xml2json(srcDOM)
                     </section>
                       `;
 
-                    })} else {
-                        st.innerHTML = "";
-                    }
-                    let slider = document.querySelectorAll(".slider")
-                    let mouseX;
-                    let mouseY;
-                    slider.forEach(element => {
-                      element.addEventListener('touchend',(e) =>{
-                        if(e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY){
-                          
-                          if (e.changedTouches[0].clientX + 100 < mouseX) {
-                          
-                            element.style.transform = "translateX(-6rem)"
-                          }else if(e.changedTouches[0].clientX - 100 > mouseX)
-                          element.style.transform = "translateX(0)"
-                        }
-                        
-
-                      })
-                      element.addEventListener('touchstart',(e) =>{
-                        mouseX = e.touches[0].clientX
-                        mouseY = e.touches[0].clientY
-      
-
-                      })
+              let travelStorage = document.querySelectorAll('.travelStorage');
+              travelStorage.forEach(E => {
+                E.addEventListener('click', () => {
+                  let feed;
+                  if (localStorage.getItem("article")) {
+                    feed = JSON.parse(localStorage.getItem("article"));
+                    feed.push({
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
                     });
+                    console.log("hej")
+                  } else {
+                    feed = [{
+                      title: element.title,
+                      description: element.description,
+                      link: element.link,
+                      category: data.rss.channel.title.split(" &gt; ").pop()
+                    }];
+                  }
+                  localStorage.setItem("article", JSON.stringify(feed))
                 })
-            });
-         }
+              });
+            })
+          } else {
+            se.innerHTML = "";
+          }
+
+          let slider = document.querySelectorAll(".slider")
+          let mouseX;
+          let mouseY;
+          slider.forEach(element => {
+            element.addEventListener('touchend', (e) => {
+              if (e.changedTouches[0].clientY + 50 >= mouseY && e.changedTouches[0].clientY - 50 <= mouseY) {
+
+                if (e.changedTouches[0].clientX + 100 < mouseX) {
+
+                  element.style.transform = "translateX(-6rem)"
+                } else if (e.changedTouches[0].clientX - 100 > mouseX)
+                  element.style.transform = "translateX(0)"
+              }
+
+
+            })
+            element.addEventListener('touchstart', (e) => {
+              mouseX = e.touches[0].clientX
+              mouseY = e.touches[0].clientY
+
+
+            })
+          });
+        })
+      });
+  }

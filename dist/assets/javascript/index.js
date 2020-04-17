@@ -21,9 +21,9 @@ if (localStorage.getItem("europe") == "on") {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -116,9 +116,7 @@ if (localStorage.getItem("europe") == "on") {
         });
       } else {
         se.innerHTML = "";
-      } // skal bruges på archive siden 
-      //JSON.parse(localStorage.getItem("article")).forEach(article => console.log(article.category))
-
+      }
 
       var slider = document.querySelectorAll(".slider");
       var mouseX;
@@ -148,9 +146,9 @@ if (localStorage.getItem("health") == "on") {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -213,10 +211,36 @@ if (localStorage.getItem("health") == "on") {
 
       if (ha.className === "healthAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          sh.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          sh.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0 healthStorage\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          var healthStorage = document.querySelectorAll('.healthStorage');
+          healthStorage.forEach(function (E) {
+            E.addEventListener('click', function () {
+              var feed;
+
+              if (localStorage.getItem("article")) {
+                feed = JSON.parse(localStorage.getItem("article"));
+                feed.push({
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                });
+                console.log("hej");
+              } else {
+                feed = [{
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                }];
+              }
+
+              localStorage.setItem("article", JSON.stringify(feed));
+            });
+          });
         });
       } else {
-        sh.innerHTML = "";
+        se.innerHTML = "";
       }
 
       var slider = document.querySelectorAll(".slider");
@@ -248,9 +272,9 @@ if (localStorage.getItem("sport") == "on") {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -313,10 +337,36 @@ if (localStorage.getItem("sport") == "on") {
 
       if (sa.className === "sportAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          ss.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          ss.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0 sportStorage\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          var sportStorage = document.querySelectorAll('.sportStorage');
+          sportStorage.forEach(function (E) {
+            E.addEventListener('click', function () {
+              var feed;
+
+              if (localStorage.getItem("article")) {
+                feed = JSON.parse(localStorage.getItem("article"));
+                feed.push({
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                });
+                console.log("hej");
+              } else {
+                feed = [{
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                }];
+              }
+
+              localStorage.setItem("article", JSON.stringify(feed));
+            });
+          });
         });
       } else {
-        ss.innerHTML = "";
+        se.innerHTML = "";
       }
 
       var slider = document.querySelectorAll(".slider");
@@ -348,9 +398,9 @@ if (localStorage.getItem("business") == "on") {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -413,10 +463,36 @@ if (localStorage.getItem("business") == "on") {
 
       if (ba.className === "buisnessAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          sb.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          sb.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0 buisnessStorage\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          var buisnessStorage = document.querySelectorAll('.buisnessStorage');
+          buisnessStorage.forEach(function (E) {
+            E.addEventListener('click', function () {
+              var feed;
+
+              if (localStorage.getItem("article")) {
+                feed = JSON.parse(localStorage.getItem("article"));
+                feed.push({
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                });
+                console.log("hej");
+              } else {
+                feed = [{
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                }];
+              }
+
+              localStorage.setItem("article", JSON.stringify(feed));
+            });
+          });
         });
       } else {
-        sb.innerHTML = "";
+        se.innerHTML = "";
       }
 
       var slider = document.querySelectorAll(".slider");
@@ -447,9 +523,9 @@ if (localStorage.getItem("travel") == "on") {
     return response.text();
   }).then(function (xmlStr) {
     /**
-    * This function coverts a DOM Tree into JavaScript Object. 
-    * @param srcDOM: DOM Tree to be converted. 
-    */
+     * This function coverts a DOM Tree into JavaScript Object. 
+     * @param srcDOM: DOM Tree to be converted. 
+     */
     function xml2json(srcDOM) {
       var children = _toConsumableArray(srcDOM.children); // base case for recursion. 
 
@@ -511,10 +587,36 @@ if (localStorage.getItem("travel") == "on") {
 
       if (ta.className === "travelAnimation clicked") {
         data.rss.channel.item.forEach(function (element) {
-          st.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          st.innerHTML += "\n                      <section class=\"flex justify-between items-center my-6 slider\">\n                        <figur class=\"flex items-center w-full flex-shrink-0\">\n                            <img src=\"/assets/images/undertema.png\" alt=\"\" class=\"rounded-full h-16 w-16 ml-8\">\n                            <section class=\"mx-4 newsTextContainer\">\n                                <h1>".concat(element.title, "</h1>\n                                <p>\n                                ").concat(element.description, "\n                                </p>\n                            </section>\n                        </figur>\n                        <figur class=\"flex items-center justify-center flex-shrink-0\">\n                            <img src=\"/assets/images/archive.png\" alt=\"\" class=\"h-24 w-24 bg-teal-400 p-8 flex-shrink-0 travelStorage\">\n                        </figur>\n                    </section>\n                    </section>\n\n                    </section>\n                      ");
+          var travelStorage = document.querySelectorAll('.travelStorage');
+          travelStorage.forEach(function (E) {
+            E.addEventListener('click', function () {
+              var feed;
+
+              if (localStorage.getItem("article")) {
+                feed = JSON.parse(localStorage.getItem("article"));
+                feed.push({
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                });
+                console.log("hej");
+              } else {
+                feed = [{
+                  title: element.title,
+                  description: element.description,
+                  link: element.link,
+                  category: data.rss.channel.title.split(" &gt; ").pop()
+                }];
+              }
+
+              localStorage.setItem("article", JSON.stringify(feed));
+            });
+          });
         });
       } else {
-        st.innerHTML = "";
+        se.innerHTML = "";
       }
 
       var slider = document.querySelectorAll(".slider");
